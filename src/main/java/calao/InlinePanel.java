@@ -633,8 +633,10 @@ public class InlinePanel extends JPanel implements ActionListener {
 					&& gameSubType != appPrefs.NOTE_INTERVALS
 					&& userNotes.size() != 0) {
 				int idx = userNotes.indexOf(pitch);
-				if (idx != -1)
+				if (idx != -1) {
+				    //System.out.println("removing " + pitch + " at" + idx);
 					userNotes.removeElementAt(idx);
+				}
 			} else if (fromPiano == false && userNotes.size() != 0) {
 				int idx = userNotes.indexOf(pitch);
 				if (idx != -1)
@@ -645,6 +647,7 @@ public class InlinePanel extends JPanel implements ActionListener {
 		} else {
 			if (gameType != appPrefs.GAME_STOPPED) {
 				userNotes.add(pitch);
+				//System.out.println("Got "+userNotes);
 				boolean match = checkGameStatus(gameNotes, userNotes);
 				if (match == true) {
 					updateGameStats(1);
@@ -661,11 +664,19 @@ public class InlinePanel extends JPanel implements ActionListener {
 
 					gameThread.needNewNote = true;
 				} else {
+
 					appMidi.playNote(pitch, 90);
+					//System.out.println("note intervals? " + (gameSubType == appPrefs.NOTE_INTERVALS));
+					//System.out.println("User notes: " + userNotes.size() + " " + userNotes);
 					if ((gameSubType == appPrefs.NOTE_CHORDS && userNotes
-							.size() == 3)
-							|| gameSubType != appPrefs.NOTE_CHORDS)
+							.size() == 3) ||
+					    (gameSubType == appPrefs.NOTE_INTERVALS && userNotes.size() == 2)
+					    || (gameSubType != appPrefs.NOTE_CHORDS && gameSubType != appPrefs.NOTE_INTERVALS)) {
 						updateGameStats(0);
+						//gameNotes.clear();
+						//System.out.println("Removing...");
+						userNotes.remove(0);
+					}
 					piano.keyPressed(pitch, true);
 				}
 			} else {
@@ -688,14 +699,21 @@ public class InlinePanel extends JPanel implements ActionListener {
 		int matchCount = 0;
 		int checkSize = 1;
 
-		/*
-		 * // enable to debug logger.debug("[checkGameStatus] "); for (int i =
-		 * 0; i < game.size(); i++) logger.debug(game.get(i).pitch + " ");
-		 * logger.debug("  "); logger.debug(user); logger.debug("");
-		 */
+		
+		  // enable to debug
+		//System.out.println("[checkGameStatus] ");
+		//for (int i = 0; i < game.size(); i++)
+		//    System.out.println(game.get(i).pitch + " ");
+
+		//System.out.println("");
+	        //System.out.println(user);
+	        //System.out.println("");
+		 
 		if (gameType != appPrefs.INLINE_MORE_NOTES) {
-			if (game.size() != user.size())
+		    if (game.size() != user.size()){
+			//System.out.println("Falsing");
 				return false;
+		    }
 			checkSize = game.size();
 		}
 
@@ -710,6 +728,7 @@ public class InlinePanel extends JPanel implements ActionListener {
 		if (matchCount == checkSize)
 			return true;
 
+		//System.out.println("Default false");		
 		return false;
 	}
 
@@ -723,6 +742,8 @@ public class InlinePanel extends JPanel implements ActionListener {
 		if (gameNotes.size() == 0) {
 			return;
 		}
+		//System.out.println("Here!" + answType);
+		//new Error(""+answType).printStackTrace();
 		int score = 0;
 		if (gameType != appPrefs.INLINE_LEARN_NOTES) {
 			int xdelta = gameNotes.get(0).xpos - noteXStartPos;
@@ -913,9 +934,9 @@ public class InlinePanel extends JPanel implements ActionListener {
 							if (gameType == appPrefs.INLINE_LEARN_NOTES) {
 								setLearningInfo(true, -1);
 							}
-							logger.trace("Got note with pitch: "
-									+ newNote.pitch + " (level:"
-									+ newNote.level + ")");
+							//System.out.print("Got note with pitch: "
+							//		+ newNote.pitch + " (level:"
+							//		+ newNote.level + ")");
 							if (gameType != appPrefs.INLINE_MORE_NOTES) {
 								appMidi.playNote(newNote.pitch, 90);
 							}

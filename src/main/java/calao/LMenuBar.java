@@ -190,7 +190,7 @@ public class LMenuBar extends JMenuBar implements ActionListener
         bGroup.add(rblanguageeo);
         langMenu.add(rblanguageeo);
         
-        rblanguagefr=new JRadioButtonMenuItem("Français");
+        rblanguagefr=new JRadioButtonMenuItem("Franis");
         rblanguagefr.setMnemonic(KeyEvent.VK_F);
         bGroup.add(rblanguagefr);
         rblanguagefr.addActionListener(this);
@@ -232,7 +232,7 @@ public class LMenuBar extends JMenuBar implements ActionListener
         bGroup.add(rblanguagept);
         langMenu.add(rblanguagept);
         
-        rblanguageru=new JRadioButtonMenuItem("Ã?Â Ã‘Æ’Ã‘ï¿½Ã‘ï¿½Ã?ÂºÃ?Â¸Ã?Â¹");
+        rblanguageru=new JRadioButtonMenuItem("no way");
         rblanguageru.setMnemonic(KeyEvent.VK_R);
         rblanguageru.addActionListener(this);
         bGroup.add(rblanguageru);

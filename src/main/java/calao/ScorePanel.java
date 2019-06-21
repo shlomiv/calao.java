@@ -408,6 +408,7 @@ public class ScorePanel extends JPanel implements ActionListener, KeyListener
 	 */
 	private void gameFinished()
 	{
+        logger.error("Shlomi");
 		String title;
 		int type = 0;
 		int correct = stats.getCorrectNumber();
@@ -454,6 +455,9 @@ public class ScorePanel extends JPanel implements ActionListener, KeyListener
 	 */
 	private void checkNote(int cursorPos, int pitch, boolean press)
 	{
+        logger.error("Checking note", new Error("here"));
+
+        System.out.println("Checking note" + new Error("here"));
 		int delta1 = -1, delta2 = -1;
 		if (currentNoteIndex < 0 || currentNoteIndex >= gameNotes.size())
 			return;
@@ -497,6 +501,8 @@ public class ScorePanel extends JPanel implements ActionListener, KeyListener
 			int noteMargin = n.get(lookupIndex).xpos - (accuracy / 2);
 			boolean noteFound = false;
 
+
+            
 			// check against current note X position + margins
 			if (cursorPos > noteMargin && cursorPos < noteMargin + accuracy)
 				noteFound = true;

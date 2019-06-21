@@ -5,9 +5,9 @@ import java.io.FileReader;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.apache.maven.project.MavenProject;
+//import org.apache.maven.model.Model;
+//import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+//import org.apache.maven.project.MavenProject;
 
 public class Version {
 
@@ -28,15 +28,16 @@ public class Version {
 	}
 
 	public Version(String v) {
-		if (v == null)
-			versionString = getBuildStringFromPomXml();
-		else
-			versionString = v;
-		parseAttributesFromVersionString(versionString);
+        
+		//if (v == null)
+        //		versionString = getBuildStringFromPomXml();
+		//else
+			versionString = "1.0.0";
+        	parseAttributesFromVersionString(versionString);
 		
 	}
 
-	public void parseAttributesFromVersionString(String v) {
+    public void parseAttributesFromVersionString(String v) {
 		logger.trace("versionString " + v);
 		String parts[] = v.split("\\.");
 		
@@ -60,7 +61,7 @@ public class Version {
 			;
 
 	}
-
+    /*
 	public String getBuildStringFromPomXml() {
 		Model model = null;
 		FileReader reader = null;
@@ -80,7 +81,7 @@ public class Version {
 		logger.trace("version " + project.getVersion());
 		return project.getVersion();
 	}
-
+    */
 	public int getMajor() {
 		return major;
 	}

@@ -97,7 +97,7 @@ public class Preferences
 	
 	/** The CLE f_ c4. */
 	public int CLEF_C4 = 0x0008;
-	/*
+	
 	public int G2_CLEF = 0x0001;
 	public int C1_CLEF = 0x0002;
 	public int C2_CLEF = 0x0004;
@@ -105,7 +105,7 @@ public class Preferences
 	public int C4_CLEF = 0x0016;
 	public int C5_CLEF = 0x0032;
 	public int F4_CLEF = 0x0064;
-	*/
+	
 	/** The game stopped. */
 	public int GAME_STOPPED        = 0;
 	

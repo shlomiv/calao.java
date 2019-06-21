@@ -153,6 +153,15 @@ public class ClefSelector extends JPanel implements MouseListener
 		this.choosen = key;
 	}
 
+    public void setChoosen(String key)
+	{
+		this.choosen = key;
+	}
+
+    public String getChoosen() {
+        return this.choosen;
+    }
+    
 	/* (non-Javadoc)
 	 * @see javax.swing.JComponent#setEnabled(boolean)
 	 */
